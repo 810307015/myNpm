@@ -1,0 +1,18 @@
+{
+  "name": "generate-gua",
+  "version": "1.0.7",
+  "description": "随机的快速生成一个周易的卦象",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "keywords": [
+    "gua",
+    "zhouyi",
+    "卦象",
+    "周易"
+  ],
+  "author": "zhangzhongming",
+  "license": "ISC"
+}
