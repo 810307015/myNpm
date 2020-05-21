@@ -34,9 +34,14 @@ onConfirm = (value) => {
   // 范围 ['2020-05-01', '2020-05-20']
 }
 
-![年份选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/年份选择.png?raw=true)
-![月份选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/月份选择.png?raw=true)
-![日期选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/日期选择.png?raw=true)
-![范围选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/范围选择.png?raw=true)
-
 ```
+
+### 效果展示图
+
+- ![年份选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/年份选择.png?raw=true)
+
+- ![月份选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/月份选择.png?raw=true)
+
+- ![日期选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/日期选择.png?raw=true)
+
+- ![范围选择](https://github.com/810307015/myNpm/blob/master/datePicker/asset/范围选择.png?raw=true)
