@@ -1,0 +1,39 @@
+.MonthSwitch {
+  
+  .date-picker-switch {
+    display: flex;
+    height: 1.15rem;
+    justify-content: space-between;
+    align-items: center;
+    color: #0070FB;
+    border-bottom: 0.02rem solid rgba(191, 191, 191, 0.3);
+    padding: 0 0.45rem;
+
+    .disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    &-operate {
+      display: flex;
+      align-items: center;
+    }
+
+    &_month-last {
+      margin-left: 0.6rem;
+    }
+
+    &_month-next {
+      margin-right: 0.6rem;
+    }
+    
+    &.month {
+      .date-picker-switch_month-last {
+        margin-left: 0.2rem;
+      }
+      .date-picker-switch_month-next {
+        margin-right: 0.2rem;
+      }
+    }
+  }
+}

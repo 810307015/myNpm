@@ -1,0 +1,63 @@
+.DatePicker {
+
+  .date-picker-trigger {
+    display: inline-flex;
+    align-items: center;
+    height: 0.75rem;
+    padding: 0 0.37rem;
+    border-radius: 0.375rem;
+    background: #F6F6F6;
+    color: #565656;
+    font-size: 0.35rem;
+    border: 0.02rem solid #D2D2D2;
+    white-space: nowrap;
+
+    .triangle {
+      margin-top: 0.08rem;
+      margin-left: 0.15rem;
+      width: 0;
+      height: 0;
+      border-width: 0.06rem 0.08rem;
+      border-style: solid;
+      border-color: #565656 transparent  transparent transparent;
+    }
+  }
+
+  @media screen and (max-width: 370px) {
+    .date-picker-trigger {
+      font-size: 0.28rem;
+    }
+  }
+}
+
+.date-picker-container {
+  background: #FFFFFF;
+  border-radius: 0.27rem 0.27rem 0 0;
+  overflow: hidden;
+
+  .am-picker-col {
+    height: 7rem;
+  }
+
+  .am-picker {
+    .am-picker-col-indicator {
+    
+      border-top: 0.02rem solid rgba(0, 112, 251, 0.5);
+      border-bottom: 0.02rem solid rgba(0, 112, 251, 0.5);
+    }
+  }
+
+  .am-picker-col-item  {
+    font-size: 0.43rem;
+  }
+
+  .am-picker-col-item-selected {
+    color: rgba(0, 112, 251, 1);
+    font-size: 0.48rem;
+  }
+}
+
+.custom-date-picker-modal {
+  border-radius: 0.27rem 0.27rem 0 0;
+  overflow: hidden;
+}

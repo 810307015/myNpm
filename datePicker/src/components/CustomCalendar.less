@@ -1,0 +1,112 @@
+.CustomCalendar {
+  @size: 1.3rem;
+  padding-bottom: 0.5rem;
+  .date-picker-calendar {
+    padding: 0 0.25rem;
+    color: #505050;
+    font-size: 0.37rem;
+
+    .disabled {
+      pointer-events: none;
+      opacity: 0.2 !important;
+    }
+
+    &-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.3rem;
+    }
+
+    &-item {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width:  @size;
+      height:  @size;
+      font-size: 0.43rem;
+      font-weight: bold;
+      transition: all 0.1s;
+
+      &:first-child {
+        border-radius: 50% 0 0 50%;
+      }
+
+      &:last-child {
+        border-radius: 0 50% 50% 0;
+      }
+
+      &.includes {
+        background: #E5F0FF;
+        opacity: 1 !important;
+      }
+
+      &.title {
+        font-weight: normal;
+      }
+
+      &.freedom {
+        color: #FC3838;
+      }
+
+      &.gray {
+        opacity: 0.5;
+      }
+
+      &.active {
+        background: #0070FB;
+        border-radius: 50%;
+        color: #FFFFFF;
+      }
+
+      &.start {
+        border-radius: 50% 0 0 50%;
+        background: #E5F0FF;
+        opacity: 1 !important;
+        &.end,
+        &.noBg,
+        &.last-col  {
+          background: none;
+        }
+        &::before {
+          content: '起';
+          position: absolute;
+          top: -0.5rem;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.3rem;
+          font-weight: normal;
+        }
+      }
+
+      &.end {
+        border-radius: 0 50% 50% 0;
+        background: #E5F0FF;
+        opacity: 1 !important;
+        &.first-col {
+          background: none;
+        }
+        &::after {
+          content: '止';
+          position: absolute;
+          bottom: -0.5rem;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.3rem;
+          font-weight: normal;
+        }
+      }
+
+      .effect-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: @size;
+        height: @size;
+        border-radius: 50%;
+        color: #FFFFFF;
+        background: #0070FB;
+      }
+    }
+  }
+}
