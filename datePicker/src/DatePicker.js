@@ -25,7 +25,9 @@
  *    <DatePicker type="range" option={{ isTodayLast: true }} onConfirm={this.onConfirm} title={<div>自定义</div>} />
  */
 import React, { Component } from 'react';
-import { Modal } from 'antd-mobile';
+// import { Modal } from 'antd-mobile';
+import Modal from 'antd-mobile/lib/modal';  // 加载 JS
+import 'antd-mobile/lib/modal/style/css';        // 加载 CSS
 import moment from 'moment';
 
 import YearPicker from './components/YearPicker';
@@ -183,6 +185,8 @@ class DatePicker extends Component {
   }
 
   componentDidMount() {
+    const width = document.documentElement.clientWidth;
+    document.documentElement.style = `font-size: ${width / 10}px`;
     this.setCommonState();
   }
 

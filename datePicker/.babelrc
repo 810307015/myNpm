@@ -1,8 +1,18 @@
 {
   "presets": [
-    "es2015"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ],
   "plugins": [
-    ["import", { "libraryName": "antd-mobile", "style": "css" }] // `style: true` 会加载 less 文件
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "import",
+      {
+        "libraryName": "antd-mobile",
+        "libraryDirectory": "lib",
+        "style": "css"
+      }
+    ]
   ]
 }

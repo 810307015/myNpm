@@ -2,7 +2,10 @@
  * 时间选择器子选择器，周选择器
  */
 import React, { Component } from 'react';
-import { PickerView } from 'antd-mobile';
+// import { PickerView } from 'antd-mobile';
+import PickerView from 'antd-mobile/lib/picker-view';  // 加载 JS
+import 'antd-mobile/lib/picker-view/style/css';        // 加载 CSS
+
 import moment from 'moment';
 
 import MonthSwitch from './MonthSwitch';

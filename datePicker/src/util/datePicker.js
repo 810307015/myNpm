@@ -144,7 +144,7 @@ function monthDay(date = new Date()) {
   return res;
 }
 
-module.exports = {
+export {
   getCurrentYear,
   getCurrentYearMonth,
   getMonthAndWeek,

@@ -2,7 +2,9 @@
  * 时间选择组件的子组件，用来在周选择器，日期选择器，范围选择器中增加切换月份的功能
  */
 import React, { Component } from 'react';
-import { Icon } from 'antd-mobile';
+// import { Icon } from 'antd-mobile';
+import Icon from 'antd-mobile/lib/icon';  // 加载 JS
+import 'antd-mobile/lib/icon/style/css';        // 加载 CSS
 import moment from 'moment';
 
 import './MonthSwitch.less';
