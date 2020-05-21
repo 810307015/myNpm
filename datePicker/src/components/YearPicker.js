@@ -2,9 +2,9 @@
  * 年选择器，时间选择器的子选择器
  */
 import React, { Component } from 'react';
-// import { PickerView } from 'antd-mobile'; 
-import PickerView from 'antd-mobile/lib/picker-view';  // 加载 JS
-import 'antd-mobile/lib/picker-view/style/css';        // 加载 CSS  
+import { PickerView } from 'antd-mobile'; 
+// import PickerView from 'antd-mobile/lib/picker-view';  // 加载 JS
+// import 'antd-mobile/lib/picker-view/style/css';        // 加载 CSS  
 
 import {
   getCurrentYear,
