@@ -4,12 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './index.js', //入口文件路径
+  entry: './src/index.js', //入口文件路径
   output: {
     filename: '[name].js',
-    library: 'service-redux',
-    libraryTarget: 'umd',
-    libraryExport: 'default'
+    libraryTarget: "umd"
   },
   module: {
     rules: [

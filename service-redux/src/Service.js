@@ -9,7 +9,7 @@ class Service {
 
   subscribe = (callback) => {
     this.subscription = this.data$.subscribe(callback);
-    this.next();
+    this.next(this.data);
 
     return () => {
       this.subscription.unsubscribe();
@@ -17,12 +17,12 @@ class Service {
   }
 
   next = (data) => {
-    this.data$.next(data || this.data);
+    this.data$.next(data);
   }
 
   set = (data) => {
     this.data = { ...this.data, ...data };
-    this.next();
+    this.next(this.data);
   }
 }
 
