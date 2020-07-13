@@ -9,3 +9,45 @@
 - `npm adduser`登录 npm 账户。
 - `npm publish`发布 npm 包。
 - 已经发布过的版本不可重复发布，需要更改`package.json`中的`version`版本号之后才可重新发布。
+
+### 针对react的包，基本需要安装以下依赖包
+
+- react
+- @babel/core
+- @babel/plugin-proposal-class-properties
+- @babel/plugin-proposal-object-rest-spread
+- @babel/preset-env
+- @babel/preset-react
+- babel-loader
+- clean-webpack-plugin
+- webpack
+- webpack-cli
+
+#### 再配置一下.babelrc
+
+```json
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
+  ]
+}
+```
+
+#### 配置以下.npmignore
+
+```txt
+.babelrc
+src
+CODE_OF_CONDUCT.md
+node_modules
+.gitignore
+webpack.config.js
+yarn.lock
+.eslintrc
+.history
+```
