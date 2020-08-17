@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const Jimp = require('jimp');
 const path = require('path');
 
@@ -41,15 +42,14 @@ const clipImage = (url, files, isVertical = true) => {
     console.log('裁剪结束，耗费时长：', +new Date() - startTime);
   })
 }
-
-module.exports = (file, count, isHorizontal) => {
-  if(!file || !/[.png|.jpeg|.bmp|.gif|.tiff]$/.test(file)) {
-    console.log(`请给一个合法的图片路径，图片格式只支持bmp/png/gif/jpeg/tiff`);
-  }
-  const number = Number(count);
-  const index = file.lastIndexOf('.');
-  const fileName = file.slice(0, index);
-  const isVertical = !isHorizontal;
-  const files = new Array(number).fill(0).map((item, index) => path.resolve(__dirname, `${fileName}_${index + 1}.png`));
-  return clipImage(path.resolve(__dirname, file), files, isVertical);
-};
+const args = process.argv || [];
+const [, , file = '', count = 2, isHorizontal] = args;
+if(!file || !/[.png|.jpeg|.bmp|.gif|.tiff]$/.test(file)) {
+  console.log(`请给一个合法的图片路径，图片格式只支持bmp/png/gif/jpeg/tiff`);
+}
+const number = Number(count);
+const index = file.lastIndexOf('.');
+const fileName = file.slice(0, index);
+const isVertical = isHorizontal !== 'true';
+const files = new Array(number).fill(0).map((item, index) => path.resolve(__dirname, `${fileName}_${index + 1}.png`));
+clipImage(path.resolve(__dirname, file), files, isVertical);
