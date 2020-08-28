@@ -51,5 +51,5 @@ const number = Number(count);
 const index = file.lastIndexOf('.');
 const fileName = file.slice(0, index);
 const isVertical = isHorizontal !== 'true';
-const files = new Array(number).fill(0).map((item, index) => path.resolve(__dirname, `${fileName}_${index + 1}.png`));
+const files = new Array(number).fill(0).map((item, index) => path.resolve(process.cwd(), `${fileName}_${index + 1}.png`));
 clipImage(path.resolve(__dirname, file), files, isVertical);

@@ -1,7 +1,7 @@
 ### 使用说明
 
 1. 全局安装，`npm i image-cut -g`。
-2. 命令行调用：`imageCut [图片路径] [裁剪成几份] [是否横向切，传true就是横向切，不传就是纵向切]`。如`imageCut a.png 3`。
+2. 命令行调用，在对应的文件夹下调用：`imageCut [图片路径] [裁剪成几份] [是否横向切，传true就是横向切，不传就是纵向切]`。如`imageCut a.png 3`。
 3. 代码引用：
 ```
 const imageCut = require('image-cut');
