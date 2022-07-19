@@ -1,0 +1,27 @@
+{
+  "name": "webpack-import-analysis-import",
+  "version": "1.0.0",
+  "description": "A import analysis for webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/810307015/myNpm.git"
+  },
+  "keywords": [
+    "rxjs",
+    "redux",
+    "service"
+  ],
+  "author": "zhangzhongming",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/810307015/myNpm/issues"
+  },
+  "homepage": "https://github.com/810307015/myNpm#readme",
+  "devDependencies": {
+    "enhanced-resolve": "^5.10.0"
+  }
+}
