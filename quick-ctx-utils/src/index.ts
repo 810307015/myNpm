@@ -25,7 +25,10 @@ export const drawImage = ({
   })
 };
 
-
+/**
+ * 绘制文字，是否带背景色或者边框
+ * @param param0 
+ */
 export const drawText = ({
   ctx,
   text,
@@ -35,13 +38,18 @@ export const drawText = ({
   fontWeight,
   fontFamily = 'serif',
   color,
-  stroke,
-  strokeWidth = 0,
+  container = false,
+  containerRender,
 }: DrawTextProps) => {
   ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-  if(stroke) {
-    ctx.fillStyle = color;
-  } else {
-
+  const textWidth = ctx.measureText(text).width;
+  let nX = x,
+      nY = y;
+  if(container && containerRender) {
+    const position = containerRender?.({ ctx, x, y, textWidth, fontSize });
+    nX = position.x;
+    nY = position.y;
   }
+  ctx.fillStyle = color;
+  ctx.fillText(text, nX, nY);
 };

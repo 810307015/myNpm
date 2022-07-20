@@ -30,7 +30,5 @@ export type DrawTextProps = {
   fontFamily: string;
   color: string;
   container?: boolean;
-  containerRender?: (props: ContainerRenderProps): Position => ({ x, y });
-  stroke?: boolean;
-  strokeWidth?: number;
+  containerRender?: (props: ContainerRenderProps) => Position;
 };
