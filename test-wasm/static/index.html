@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="file" id="files" style="display: none" onchange="fileImport();">
+        <input type="button" id="fileImport" value="选择一张彩色的png图片">
+        <!-- 原图 -->
+        <div id="box"></div>
+        <!-- 修改后 -->
+        <div>
+            <img id="target">
+        </div>
+
+        <form id="form">
+            <!-- 黑白 -->
+            <div>
+                <label>灰度</label>
+                <label for="gray-on">开启</label>
+                <input type="radio" id="gray-on" name="gray" value="1">
+                <label for="gray-off">关闭</label>
+                <input type="radio" id="gray-off" name="gray" value="0">
+            </div>
+
+
+
+            <!-- 缩放 -->
+            <div>
+                <label>缩略图</label>
+                <input type="text" name="thumbnail-width" placeholder="width">
+                <input type="text" name="thumbnail-height" placeholder="height">
+            </div>
+
+
+            <!-- 反色 -->
+            <div>
+                <label>反色</label>
+                <label for="invert-on">开启</label>
+                <input type="radio" id="invert-on" name="invert" value="1">
+                <label for="invert-off">关闭</label>
+                <input type="radio" id="invert-off" name="invert" value="0">
+            </div>
+
+
+            <!-- 锐化蒙版 -->
+            <div>
+                <label>锐化蒙版</label>
+                <input type="range" min="-10" max="10" step="0.01" name="unsharpen-sigma" placeholder="sigma">
+                <input type="range" min="-100" max="100" name="unsharpen-threshold" placeholder="threshold">
+            </div>
+
+
+            <!-- 对比度 -->
+            <div>
+                <label>对比度</label>
+                <input type="range" min="-100" max="100" name="contrast" placeholder="contrast">
+            </div>
+
+
+            <!-- 亮度 -->
+            <div>
+                <label>亮度</label>
+                <input type="range" min="-100" max="100" name="brighten" placeholder="brighten">
+            </div>
+
+
+            <!-- 色相 -->
+            <div>
+                <label>色相</label>
+                <input type="range" min="-100" max="100" name="huerotate" placeholder="huerotate">
+            </div>
+
+        </form>
+
+    </div>
+    <script type="module">
+        import init, { gray, scale, invert, unsharpen, constrast, brighten, huerotate, getBase64, transform } from '../pkg/test_wasm.js';
+
+        await init();
+
+        let uint8Array = new Uint8Array();
+        let timer = null;
+
+        document.querySelector('#form').addEventListener('change', () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => {
+                const form = document.querySelector('#form');
+                const formData = new FormData(form);
+                let data = {};
+                for (let [key, value] of formData.entries()) {
+                    if (['gray', 'invert'].includes(key)) {
+                        if (Number(value) === 1) {
+                            data[key] = [];
+                        }
+                    } else if (['contrast', 'brighten', 'huerotate'].includes(key)) {
+                        if (value.trim() !== '') {
+                            data[key] = [Number(value)];
+                        }
+                    } else {
+                        data[key] = Number(value);
+                    }
+                }
+                if (data['thumbnail-width'] && data['thumbnail-height']) {
+                    data['thumbnail'] = [data['thumbnail-width'], data['thumbnail-height']];
+                }
+                delete data['thumbnail-width'];
+                delete data['thumbnail-height'];
+
+                if (data['unsharpen-sigma'] && data['unsharpen-threshold']) {
+                    data['unsharpen'] = [data['unsharpen-sigma'], data['unsharpen-threshold']];
+                }
+                delete data['unsharpen-sigma'];
+                delete data['unsharpen-threshold'];
+
+                console.log(data);
+
+                let newUnit8Array = transform(uint8Array, data);
+                const base64 = getBase64(newUnit8Array);
+                document.querySelector("#target").src = base64;
+            }, 1000);
+        })
+
+        // greet();
+        document.querySelector("#fileImport").addEventListener('click', () => {
+            document.querySelector("#files").click();
+        })
+
+        window.fileImport = function () {
+            //获取读取我文件的 File 对象
+            var selectedFile = document.getElementById('files').files[0];
+            var reader = new FileReader(); // 这是核心, 读取操作就是由它完成.
+            reader.readAsArrayBuffer(selectedFile); // 读取文件的内容,也可以读取文件的URL
+            reader.onload = function () {
+                uint8Array = new Uint8Array(this.result);
+                console.log(uint8Array);
+                const base64 = getBase64(uint8Array);
+
+                const img = new Image();
+                img.src = base64;
+                document.querySelector('#box').appendChild(img);
+            }
+        }
+    </script>
+
+    <script>
+
+    </script>
+</body>
+
+</html>
