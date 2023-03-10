@@ -3,9 +3,13 @@ mod utils;
 use std::collections::HashMap;
 use std::io::prelude::*;
 use std::io::{Cursor, SeekFrom};
+use std::mem::transmute;
+use std::thread;
+use std::time::Duration;
 
 use image::*;
 use serde::{Deserialize, Serialize};
+use utils::{frost, gaussian_blur, handler_image, mirror, sketch, Direction, Operate};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -84,14 +88,63 @@ pub fn get_base64_image(_array: &mut [u8]) -> String {
 }
 
 /**
- * 黑白图片
+ * 灰度
  */
 #[wasm_bindgen(js_name = gray)]
 pub fn gray_image(_array: &mut [u8]) -> Vec<u8> {
     let mut img = image::load_from_memory(_array).unwrap();
-    img = img.grayscale();
 
-    return transform_u8_to_vec(img);
+    return transform_u8_to_vec(handler_image(img, Operate::Gray));
+}
+
+/**
+ * 黑白
+ */
+#[wasm_bindgen(js_name = blackAndWhite)]
+pub fn black_and_white_image(_array: &mut [u8]) -> Vec<u8> {
+    let mut img = image::load_from_memory(_array).unwrap();
+
+    return transform_u8_to_vec(handler_image(img, Operate::BlackAndWhite));
+}
+
+/**
+ * 卡通
+ */
+#[wasm_bindgen(js_name = cartoon)]
+pub fn cartoon_image(_array: &mut [u8]) -> Vec<u8> {
+    let mut img = image::load_from_memory(_array).unwrap();
+
+    return transform_u8_to_vec(handler_image(img, Operate::Cartoon));
+}
+
+/**
+ * 熔铸
+ */
+#[wasm_bindgen(js_name = founding)]
+pub fn founding_image(_array: &mut [u8]) -> Vec<u8> {
+    let mut img = image::load_from_memory(_array).unwrap();
+
+    return transform_u8_to_vec(handler_image(img, Operate::Founding));
+}
+
+/**
+ * 反色
+ */
+#[wasm_bindgen(js_name = invert)]
+pub fn invert_image(_array: &mut [u8]) -> Vec<u8> {
+    let mut img = image::load_from_memory(_array).unwrap();
+
+    return transform_u8_to_vec(handler_image(img, Operate::Inverse));
+}
+
+/**
+ * 怀旧
+ */
+#[wasm_bindgen(js_name = retro)]
+pub fn retro_image(_array: &mut [u8]) -> Vec<u8> {
+    let mut img = image::load_from_memory(_array).unwrap();
+
+    return transform_u8_to_vec(handler_image(img, Operate::Retro));
 }
 
 /**
@@ -101,17 +154,6 @@ pub fn gray_image(_array: &mut [u8]) -> Vec<u8> {
 pub fn scale_image(_array: &mut [u8], width: u32, height: u32) -> Vec<u8> {
     let mut img = image::load_from_memory(_array).unwrap();
     img = img.thumbnail(width, height);
-
-    return transform_u8_to_vec(img);
-}
-
-/**
- * 反色图片
- */
-#[wasm_bindgen(js_name = invert)]
-pub fn invert_image(_array: &mut [u8]) -> Vec<u8> {
-    let mut img = image::load_from_memory(_array).unwrap();
-    img.invert();
 
     return transform_u8_to_vec(img);
 }
@@ -170,16 +212,29 @@ pub fn transform_image(_array: &mut [u8], options: JsValue) -> Vec<u8> {
 
     for (key, value) in options.iter() {
         match key.as_str() {
-            "gray" => img = img.grayscale(),
-            "invert" => img.invert(),
+            "gray" => img = handler_image(img, Operate::Gray),
+            "invert" => img = handler_image(img, Operate::Inverse),
+            "cartoon" => img = handler_image(img, Operate::Cartoon),
+            "retro" => img = handler_image(img, Operate::Retro),
+            "founding" => img = handler_image(img, Operate::Founding),
+            "baw" => img = handler_image(img, Operate::BlackAndWhite),
             "contrast" => img = img.adjust_contrast(value[0]),
             "brighten" => img = img.brighten(value[0] as i32),
             "huerotate" => img = img.huerotate(value[0] as i32),
             "thumbnail" => img = img.thumbnail(value[0] as u32, value[1] as u32),
             "unsharpen" => img = img.unsharpen(value[0], value[1] as i32),
+            "mirror" => img = mirror(img, unsafe { transmute::<u8, Direction>(value[0] as u8) }),
+            "gaussian" => img = gaussian_blur(img, value[0] as u32),
+            "frost" => img = frost(img),
+            "sketch" => img = sketch(img, value[0] as u32),
             _ => (),
         }
     }
 
     return transform_u8_to_vec(img);
+}
+
+#[wasm_bindgen]
+pub fn sleep(time: u64) {
+    thread::sleep(Duration::from_secs(time as u64));
 }

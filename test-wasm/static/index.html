@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        img {
+            transition: all 0.5s;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,13 +25,71 @@
         </div>
 
         <form id="form">
-            <!-- 黑白 -->
+            <!-- 镜像 -->
+            <div>
+                <label>镜像</label>
+                <label for="mirror-on">横向镜像</label>
+                <input type="radio" id="mirror-on" name="mirror" value="1">
+                <label for="mirror-on">纵向镜像</label>
+                <input type="radio" id="mirror-on" name="mirror" value="2">
+                <label for="mirror-on">对角镜像</label>
+                <input type="radio" id="mirror-on" name="mirror" value="3">
+                <label for="mirror-off">关闭</label>
+                <input type="radio" id="mirror-off" name="mirror" value="0">
+            </div>
+
+            <!-- 灰度 -->
             <div>
                 <label>灰度</label>
                 <label for="gray-on">开启</label>
                 <input type="radio" id="gray-on" name="gray" value="1">
                 <label for="gray-off">关闭</label>
                 <input type="radio" id="gray-off" name="gray" value="0">
+            </div>
+
+            <!-- 灰度 -->
+            <div>
+                <label>毛玻璃</label>
+                <label for="frost-on">开启</label>
+                <input type="radio" id="frost-on" name="frost" value="1">
+                <label for="frost-off">关闭</label>
+                <input type="radio" id="frost-off" name="frost" value="0">
+            </div>
+
+            <!-- 黑白 -->
+            <div>
+                <label>黑白</label>
+                <label for="baw-on">开启</label>
+                <input type="radio" id="baw-on" name="baw" value="1">
+                <label for="baw-off">关闭</label>
+                <input type="radio" id="baw-off" name="baw" value="0">
+            </div>
+
+            <!-- 卡通 -->
+            <div>
+                <label>卡通</label>
+                <label for="cartoon-on">开启</label>
+                <input type="radio" id="cartoon-on" name="cartoon" value="1">
+                <label for="cartoon-off">关闭</label>
+                <input type="radio" id="cartoon-off" name="cartoon" value="0">
+            </div>
+
+            <!-- 怀旧 -->
+            <div>
+                <label>怀旧</label>
+                <label for="retro-on">开启</label>
+                <input type="radio" id="retro-on" name="retro" value="1">
+                <label for="retro-off">关闭</label>
+                <input type="radio" id="retro-off" name="retro" value="0">
+            </div>
+
+            <!-- 熔铸 -->
+            <div>
+                <label>熔铸</label>
+                <label for="founding-on">开启</label>
+                <input type="radio" id="founding-on" name="founding" value="1">
+                <label for="founding-off">关闭</label>
+                <input type="radio" id="founding-off" name="founding" value="0">
             </div>
 
 
@@ -63,6 +126,18 @@
                 <input type="range" min="-100" max="100" name="contrast" placeholder="contrast">
             </div>
 
+            <!-- 素描 -->
+            <div>
+                <label>素描</label>
+                <input type="range" min="0" max="100" name="sketch" placeholder="sketch">
+            </div>
+
+            <!-- 高斯模糊 -->
+            <div>
+                <label>高斯模糊</label>
+                <input type="range" min="0" max="100" value="0" name="gaussian" placeholder="gaussian">
+            </div>
+
 
             <!-- 亮度 -->
             <div>
@@ -81,7 +156,7 @@
 
     </div>
     <script type="module">
-        import init, { gray, scale, invert, unsharpen, constrast, brighten, huerotate, getBase64, transform } from '../pkg/test_wasm.js';
+        import init, { gray, scale, invert, retro, founding, cartoon, blackAndWhite, unsharpen, constrast, brighten, huerotate, getBase64, transform, sleep } from '../pkg/test_wasm.js';
 
         await init();
 
@@ -97,12 +172,12 @@
                 const formData = new FormData(form);
                 let data = {};
                 for (let [key, value] of formData.entries()) {
-                    if (['gray', 'invert'].includes(key)) {
+                    if (['gray', 'invert', 'cartoon', 'retro', 'founding', 'baw', 'frost'].includes(key)) {
                         if (Number(value) === 1) {
                             data[key] = [];
                         }
-                    } else if (['contrast', 'brighten', 'huerotate'].includes(key)) {
-                        if (value.trim() !== '') {
+                    } else if (['contrast', 'brighten', 'huerotate', 'mirror', 'gaussian', 'sketch'].includes(key)) {
+                        if (value.trim() !== '' && Number(value) !== 0) {
                             data[key] = [Number(value)];
                         }
                     } else {
@@ -123,7 +198,10 @@
 
                 console.log(data);
 
+                // let newUnit8Array = cartoon(uint8Array);
+
                 let newUnit8Array = transform(uint8Array, data);
+                console.log(newUnit8Array);
                 const base64 = getBase64(newUnit8Array);
                 document.querySelector("#target").src = base64;
             }, 1000);
