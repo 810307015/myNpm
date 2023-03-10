@@ -69,8 +69,10 @@ pub fn handler_image(img: DynamicImage, operate: Operate) -> DynamicImage {
 }
 
 /**
- * 灰度算法
+ * 灰度算法，一共有三种
  * 0.3 * R + 0.59 * B + 0.11 * B
+ * (r + g + b) / 3
+ * max(r, g, b)
  */
 pub fn gray(rgb: Rgb<f32>) -> Rgb<f32> {
     let data = rgb.0;
@@ -113,9 +115,9 @@ pub fn cartoon(rgb: Rgb<f32>) -> Rgb<f32> {
     let data = rgb.0;
     let [r, g, b] = data;
     Rgb([
-        (2.0 * g - b + r).abs() / 256.0,
-        (2.0 * b - g + r).abs() / 256.0,
-        (2.0 * b - g + r).abs() / 256.0,
+        (2.0 * g - b + r).abs() % 256.0,
+        (2.0 * b - r + g).abs() % 256.0,
+        (2.0 * r - g + b).abs() % 256.0,
     ])
 }
 

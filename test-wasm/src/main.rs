@@ -4,7 +4,7 @@ use std::fs::File;
 
 use image::{self, ImageFormat};
 use test_wasm::transform_u8_to_vec;
-use utils::{ frost, gaussian_blur, mirror, sketch, Direction};
+use utils::{ frost, gaussian_blur, mirror, sketch, Direction, handler_image, Operate};
 
 pub fn main() {
     let mut buffer: Vec<u8> = vec![
@@ -32740,7 +32740,7 @@ pub fn main() {
     ];
     let mut img = image::load_from_memory(&mut buffer).unwrap();
     // let img = handler_image(img, utils::Operate::BlackAndWhite);
-    let img = sketch(img, 10);
+    let img = handler_image(img, Operate::Cartoon);
     // let img =
     // println!("{:?}", transform_u8_to_vec(img).len());
     let mut output = File::create(format!("test.png")).unwrap();
