@@ -345,16 +345,11 @@ pub fn sketch(img: DynamicImage, radius: u32) -> DynamicImage {
             let r: u32 = r1 as u32 + r1 as u32 / (256 - r2 as u32) * r2 as u32;
             let g: u32 = g1 as u32 + g1 as u32 / (256 - g2 as u32) * g2 as u32;
             let b: u32 = b1 as u32 + b1 as u32 / (256 - b2 as u32) * b2 as u32;
-            let a: u32 = a1 as u32 + a1 as u32 / (256 - a2 as u32) * a2 as u32;
+            // let a: u32 = a1 as u32 + a1 as u32 / (256 - a2 as u32) * a2 as u32;
             _img.put_pixel(
                 x,
                 y,
-                Rgba([
-                    (r % 256) as u8,
-                    (g % 256) as u8,
-                    (b % 256) as u8,
-                    (a % 256) as u8,
-                ]),
+                Rgba([(r % 256) as u8, (g % 256) as u8, (b % 256) as u8, 255]),
             );
         }
     }
