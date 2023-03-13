@@ -9,7 +9,7 @@ use std::time::Duration;
 
 use image::*;
 use serde::{Deserialize, Serialize};
-use utils::{frost, gaussian_blur, handler_image, mirror, sketch, Direction, Operate};
+use utils::{frost, gaussian_blur, handler_image, mirror, sketch, cartoonize, Direction, Operate};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -214,7 +214,7 @@ pub fn transform_image(_array: &mut [u8], options: JsValue) -> Vec<u8> {
         match key.as_str() {
             "gray" => img = handler_image(img, Operate::Gray),
             "invert" => img = handler_image(img, Operate::Inverse),
-            "cartoon" => img = handler_image(img, Operate::Cartoon),
+            "cartoon" => img = cartoonize(img),
             "retro" => img = handler_image(img, Operate::Retro),
             "founding" => img = handler_image(img, Operate::Founding),
             "baw" => img = handler_image(img, Operate::BlackAndWhite),
