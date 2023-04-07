@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Mock Headers",
+    "description": "It can mock http headers in your pages.",
+    "version": "1.1",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Mock Headers"
+    },
+    "permissions": [
+        "activeTab",
+        "declarativeNetRequest",
+        "declarativeNetRequestFeedback",
+        "declarativeNetRequestWithHostAccess",
+        "storage"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ]
+ }
