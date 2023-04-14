@@ -69,12 +69,9 @@ pub fn get_image_base64_string(img: DynamicImage) -> String {
 
 // 将img转换成vec
 pub fn transform_u8_to_vec(img: DynamicImage) -> Vec<u8> {
-    let mut c = Cursor::new(Vec::new());
-    img.write_to(&mut c, ImageOutputFormat::Png).unwrap();
-    let mut out = Vec::new();
-    c.seek(SeekFrom::Start(0)).unwrap();
-    c.read_to_end(&mut out).unwrap();
-    return out;
+    let mut bytes: Vec<u8> = Vec::new();
+    img.write_to(&mut Cursor::new(&mut bytes), image::ImageOutputFormat::Png).unwrap();
+    bytes
 }
 
 /**
