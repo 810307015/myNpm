@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" multiple="false" id="file">
+
+    <div id="box"></div>
+    <div>
+        <button id="gray-btn">灰度</button>
+    </div>
+    <div id="target"></div>
+
+    <script type="module">
+        import init, { gray } from './pkg/test_webassembly.js';
+
+        await init();
+
+        const file = document.getElementById('file');
+        const grayBtn = document.getElementById('gray-btn');
+        let current = null;
+        let uint8Array = [];
+        file.addEventListener('change', (e) => {
+            current = e.target.files[0];
+            var reader = new FileReader(); // 这是核心, 读取操作就是由它完成.
+            reader.readAsDataURL(current); // 读取文件的内容,也可以读取文件的URL
+            reader.onload = function() {
+                const img = new Image();
+                img.src = this.result;
+                document.querySelector('#box').appendChild(img);
+            }
+        });
+        grayBtn.addEventListener('click', () => {
+            var reader = new FileReader();
+            reader.readAsArrayBuffer(current);
+            reader.onload = function () {
+                uint8Array = new Uint8Array(this.result);
+                let newUnit8Array = gray(uint8Array);
+                const img = new Image();
+                let blob = new Blob([newUnit8Array], { type: 'image/png' });
+                img.src = window.URL.createObjectURL(blob);
+                document.querySelector('#target').appendChild(img);
+            }
+        })
+    </script>
+</body>
+</html>
