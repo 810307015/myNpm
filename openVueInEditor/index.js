@@ -1,5 +1,6 @@
 export default function initOpenInEditor (options = {}) {
     let flag = false;
+    const root = options.root || ''; // vue3不用传，vue需要传
     const editor = options.editor || 'vscode';
     const block = document.createElement('div');
     block.style.backgroundColor = options.color || 'rgba(20, 125, 80, 0.3)';
@@ -14,9 +15,9 @@ export default function initOpenInEditor (options = {}) {
         let temp;
         let file = '';
         if ((
-              (temp = compnent.type)
+              (temp = component.type)
             ) || (
-                (temp = compnent.$vnode)
+                (temp = component.$vnode)
                     && (temp = temp.componentOptions)
                     && (temp = temp.Ctor)
                     && (temp = temp.options)
@@ -33,8 +34,18 @@ export default function initOpenInEditor (options = {}) {
         return getFile(component.parent || component.$parent);
     };
 
+    const findComponent = (dom) => {
+        if (dom.__vueParentComponent) {
+            return dom.__vueParentComponent;
+        }
+        if (dom.__vue__) {
+            return dom.__vue__;
+        }
+        return findComponent(dom.parentNode);
+    };
+
     const handleMouseMove = e => {
-        const { x, y, width, height } = e.target?.getBoundingClientRect();
+        const { x, y, width, height } = e.target.getBoundingClientRect();
         block.style.width = `${width}px`;
         block.style.height = `${height}px`;
         block.style.border = '1px dashed rgba(60, 150, 100, 1)';
@@ -62,9 +73,10 @@ export default function initOpenInEditor (options = {}) {
         }
         e.preventDefault();
         e.stopPropagation();
-        const path = getFile(e.target.__vueParentComponent || e.target.__vue__);
+        const path = getFile(findComponent(e.target));
         if (path) {
-            window.open(`${editor}://file/${path}`);
+            console.log(root, path);
+            window.open(`${editor}://file${root}${root ? (root[root.length - 1] === '/' ? path : `/${path}`) : path}`);
             flag = false;
             document.body.removeChild(block);
             window.removeEventListener('mousemove', handleMouseMove);
