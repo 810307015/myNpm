@@ -32,9 +32,10 @@ initOpenVueInEditor({
     editor: 'webstorm'
 });
 ```
-- 引入并初始化完成后，按下shift+x键，然后移动鼠标到需要查看的节点上，最后点击就会自动跳转到节点对应的文件中，如例
+- 引入并初始化完成后，按下shift+x键，然后移动鼠标到需要查看的节点上，最后点击就会自动跳转到节点对应的文件中，如下图
 
-<video src="https://github.com/810307015/myNpm/blob/master/openVueInEditor/openInEditor.mov" width="400" height="300">
+![演示](https://github.com/810307015/myNpm/blob/master/openVueInEditor/openInEditor.gif)
+
 
 ### 原理
 
