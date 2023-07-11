@@ -1,6 +1,6 @@
 {
   "name": "open-vue-in-editor",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "It's a function for opening vue file in editor",
   "main": "index.js",
   "keywords": ["vue", "open", "editor", "vscode"],
