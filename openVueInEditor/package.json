@@ -1,9 +1,13 @@
 {
   "name": "open-vue-in-editor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "It's a function for opening vue file in editor",
   "main": "index.js",
   "keywords": ["vue", "open", "editor", "vscode"],
   "author": "zhangzhongming",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/810307015/myNpm/tree/master/openVueInEditor"
+  }
 }
