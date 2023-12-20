@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import BrowserHttpClient from './dist/browser.mjs';
+        const http = new BrowserHttpClient();
+        http.interceptor.request(config => {
+            console.log('config = ', config);
+            return config;
+        });
+        http.interceptor.response(response => {
+            console.log('response = ', response);
+            return JSON.parse(response.data);
+        }, error => {
+            console.log('error = ', error);
+            return error;
+        });
+        http.request({
+            url: 'http://127.0.0.1:3010/data',
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    </script>
+</body>
+</html>

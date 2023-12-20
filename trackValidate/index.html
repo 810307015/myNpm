@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./base64.js"></script>
+    <style>
+        html {
+            font-size: 16px;
+            line-height: 1;
+            --primay-color: #fe632e;
+            --error-color: #f53f3f;
+        }
+        .box {
+            width: 750px;
+            height: 500px;
+            overflow-y: auto;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        .operate {
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .desc {
+            margin-right: 10px;
+        }
+        .tag-list {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .tag {
+            padding: 6px 12px;
+            border: 1px solid var(--primay-color);
+            border-radius: 4px;
+            background-color: #fff;
+            color: var(--primay-color);
+            margin-right: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+        .tag:hover {
+            background-color: var(--primay-color);
+            color: #fff;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        input[type="text"] {
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 0 12px;
+        }
+        input[type="text"]:focus-visible {
+            outline: none;
+            border-color: var(--primay-color);
+        }
+        .delete-btn {
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--error-color);
+            color: var(--error-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        button {
+            min-width: 80px;
+            padding: 6px 12px;
+            border: 1px solid var(--primay-color);
+            color: var(--primay-color);
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--primay-color);
+            color: #fff;
+        }
+        .switch {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 60px;
+            height: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--primay-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #fff;
+            padding: 0 0 0 35px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        .switch::before {
+            content: 'off';
+            color: var(--primay-color);
+        }
+        .switch::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: var(--primay-color);
+            transition: all 0.3s;
+        }
+        .switch.switch-on {
+            background-color: var(--primay-color);
+            color: #fff;
+            padding: 0 30px 0 5px;
+        }
+        .switch.switch-on::before {
+            content: 'on';
+            color: #fff;
+        }
+        .switch.switch-on::after {
+            left: 30px;
+            background-color: #fff;
+        }
+        .list-item {
+            border-radius: 8px;
+            border: 1px solid var(--primay-color);
+            color: var(--primay-color);
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        .list-item-title {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .list-item-type {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .list-item-params {
+            font-size: 14px;
+            word-break: break-all;
+        }
+        .operate {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .type-list {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .type-list-item {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--primay-color);
+            background-color: var(--primay-color);
+            color: #fff;
+            font-size: 18px;
+            margin: 0 8px 8px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .type-list-item.hidden {
+            background-color: #fff;
+            color: var(--primay-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h3>已触发的埋点</h3>
+        <div class="operate">
+            <button id="clear">清空</button>
+        </div>
+        <div id="type" class="type-list">
+
+        </div>
+        <div id="list" class="list">
+            
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>

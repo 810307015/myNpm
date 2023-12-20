@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Track Validate",
+    "description": "It can validate your track points",
+    "version": "1.1",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Track Validate"
+    },
+    "permissions": [
+        "webRequest",
+        "nativeMessaging"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+ }
