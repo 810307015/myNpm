@@ -1,0 +1,18 @@
+:root {
+    --primary-color: #1677ff;
+    --danger-color: #ff4d4f;
+    --white-color: #fff;
+    --warning-color: #ffe58f;
+    --border-color: #d9d9d9;
+
+    --black-0: #000;
+    --black-1: #111;
+    --black-2: #222;
+    --black-3: #333;
+    --black-4: #444;
+    --black-5: #555;
+    --black-6: #666;
+    --black-7: #777;
+    --black-8: #888;
+    --black-9: #999;
+}

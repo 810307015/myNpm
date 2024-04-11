@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script src="./dist/components.js" defer></script>
+    <link rel="stylesheet" href="./src/varibale.css">
+    <script>
+        function parse(decodeStr) {
+            return decodeStr.replace(/\*/g, 8);
+        }
+    </script>
+</head>
+<body>
+    <!-- <z-button type="default" onclick="testClick()">default</z-button>
+    <z-button type="primary">primary</z-button>
+    <z-button type="warning">warning</z-button>
+    <z-button type="error">error</z-button>
+    <z-button dashed>dashed</z-button>
+    <z-button size="small">small</z-button>
+    <z-button size="large">large</z-button>
+    <z-button size="large" disabled onclick="testClick()">disabled</z-button> -->
+
+    <!-- <z-digest data-parse="parse">133******88</z-digest> -->
+    <z-movable-box onmoveend="onMoveEnd">
+        <z-resizable-box>
+            <z-movable-box>
+                <img
+                    src="https://zhengxin-pub.cdn.bcebos.com/promote_image/default_photo.jpg"
+                    width="100"
+                    height="100"
+                />
+            </z-movable-box>
+        </z-resizable-box>
+    </z-movable-box>
+    <z-movable-box>
+        <img
+            src="https://zhengxin-pub.cdn.bcebos.com/promote_image/default_photo.jpg"
+            width="100"
+            height="100"
+        />
+    </z-movable-box>
+    <z-movable-box>
+        <img
+            src="https://zhengxin-pub.cdn.bcebos.com/promote_image/default_photo.jpg"
+            width="100"
+            height="100"
+        />
+    </z-movable-box>
+
+    <script>
+       function onMoveEnd(e) {
+            console.log(e);
+       }
+    </script>
+</body>
+</html>
