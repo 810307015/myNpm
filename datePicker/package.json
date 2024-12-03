@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "antd-mobile": "^2.3.3",
-    "moment": "2.26.0"
+    "moment": "2.29.4"
   },
   "peerDependencies": {
     "antd-mobile": "^2.3.3",
